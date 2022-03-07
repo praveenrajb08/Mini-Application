@@ -5,16 +5,17 @@ class Main {
     static int fivehundred=15;
     static int twohundred=15;
     static int onehundred=15;
-        static List<Integer> l=new ArrayList<>();
-        static List<String> user=new ArrayList<>();
-        static List<String> pass=new ArrayList<>();
-        static List<Integer> bal=new ArrayList<>();
-        static List<String> bank=new ArrayList<>();
-        static List<String> trans=new ArrayList<>();
+    static List<Integer> l=new ArrayList<>();
+    static List<String> user=new ArrayList<>();
+    static List<String> pass=new ArrayList<>();
+    static List<Integer> bal=new ArrayList<>();
+    static List<String> bank=new ArrayList<>();
+    static List<String> trans=new ArrayList<>();
         
         public static void main(String[] args){
         boolean val=true;
         while(val){
+            cls();
             user.add("aaaa");pass.add("0000");bal.add(80000);bank.add("abc");
             user.add("bbbb");pass.add("1111");bal.add(65000);bank.add("xyz");
             l.add(twothousand);l.add(fivehundred);l.add(twohundred);l.add(onehundred);
@@ -35,6 +36,7 @@ class Main {
                 String  adminpass=sc.next();
                 if(adminid.equals("admin") && adminpass.equals("0000")) {
                     while(true) {
+                        cls();
                     System.out.println("----------ADMIN-------");
                     System.out.println("1.LOAD");
                     System.out.println("2.DISPLAY");
@@ -43,12 +45,12 @@ class Main {
                     int lo=sc.nextInt();
                     if(lo==1) {
                         load();
-                        continue;
+                        enter();
                     }
                         
                     else if(lo==2) {
                         display();
-                        continue;
+                        enter();
                     }
                     else if(lo==3)
                         break;
@@ -61,13 +63,14 @@ class Main {
            
             int attempt=0;
             while(true){
+                cls();
     			System.out.println("Welcome user ");
     			System.out.println("Enter your name");
     			String username = sc.next();
     			System.out.println("Enter your password");
     			String  userpass = sc.next();
     			
-    			int key=0;
+    			int key=-1;
     			for(int i=0;i<user.size();i++){
     			    if(user.get(i).equals(username)){
     			        key=i;
@@ -159,11 +162,11 @@ class Main {
         System.out.println("Enter the amount to be withdrawn .....");
         int cash=sc.nextInt();
         int userbal=bal.get(key);
-        if(cash<userbal){
+        if(cash<=userbal){
             if(cash%100!=0)
                 System.out.println("enter multiples of hundred");
             else if(tot(twothousand,fivehundred,twohundred,onehundred)<cash)
-                System.out.println("insufficient cash");
+                System.out.println("insufficient cash in atm");
             else{
                 denomination(cash,key);
                 trans.set(key,trans.get(key)+"\n amount withdrawn "+cash);
@@ -266,5 +269,17 @@ class Main {
         bal.set(key,bal.get(key)+tot);
         System.out.println("amount added : "+tot);
         trans.set(key,trans.get(key)+"\n amount deposited "+tot);
+    }
+    public static void enter() {
+
+        System.out.println("\n\nPress ENTER key to goto Previous Section");
+        sc.nextLine();
+        String str = sc.nextLine();
+        if(str.equals("")) cls();
+        
+    }
+    public static void cls(){
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
     }
 }
